@@ -1,0 +1,18 @@
+---
+- hosts: ws
+  become: 1
+  ignore_errors: 1
+  gather_facts : yes
+  vars:
+    f_name: Delano
+  tasks:
+    - name: Debug module
+      debug:
+        # msg: "Hello from my playbook"
+        var: f_name
+    - name: uptime
+      command: uptime
+      register: uptime_output
+    - name: display output
+      debug:
+        var: uptime_output.stdout_lines[0]
